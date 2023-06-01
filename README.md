@@ -1,19 +1,8 @@
 # Google_Stock_Price_prediction-using-LSTM
 Prediction of Google Stock price using LSTM Model of Keras 
 
----
-jupyter:
-  colab:
-  kernelspec:
-    display_name: Python 3
-    name: python3
-  language_info:
-    name: python
-  nbformat: 4
-  nbformat_minor: 0
----
 
-::: {.cell .code execution_count="1" id="C8X6lrZvjO3P"}
+
 ``` python
 import numpy as np
 import pandas as pd
