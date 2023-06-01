@@ -402,6 +402,6 @@ plt.show()
 
 </div>
   
- [! Predicted Price Visualisation](prediction.png)
+ ![Predicted Price Visualisation](prediction.png)
 
 
