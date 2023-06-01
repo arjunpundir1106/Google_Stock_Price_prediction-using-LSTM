@@ -1,7 +1,19 @@
 # Google_Stock_Price_prediction-using-LSTM
 Prediction of Google Stock price using LSTM Model of Keras 
 
+---
+jupyter:
+  colab:
+  kernelspec:
+    display_name: Python 3
+    name: python3
+  language_info:
+    name: python
+  nbformat: 4
+  nbformat_minor: 0
+---
 
+<div class="cell code" execution_count="1" id="C8X6lrZvjO3P">
 
 ``` python
 import numpy as np
@@ -11,9 +23,11 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM,Dropout,Dense
 ```
-:::
 
-::: {.cell .code execution_count="2" id="CEo3Af3EjYnd"}
+</div>
+
+<div class="cell code" execution_count="2" id="CEo3Af3EjYnd">
+
 ``` python
 dataset_train = pd.read_csv('Google_Stock_Price_Train.csv')
 training_set = dataset_train.iloc[:, 1:2].values
@@ -28,16 +42,22 @@ for i in range(60, 1258):
     X_train.append(training_set_scaled[i-60:i, 0])
     y_train.append(training_set_scaled[i, 0])
 ```
-:::
 
-::: {.cell .code execution_count="3" id="XBbTuvPikMHg"}
+</div>
+
+<div class="cell code" execution_count="3" id="XBbTuvPikMHg">
+
 ``` python
 X_train, y_train = np.array(X_train), np.array(y_train)
 X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
 ```
-:::
 
-::: {.cell .code execution_count="4" colab="{\"base_uri\":\"https://localhost:8080/\"}" id="fBqajd_fkSdW" outputId="f8f87452-56fe-42b9-a4ee-1f4bfd49bc85"}
+</div>
+
+<div class="cell code" execution_count="4"
+colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="fBqajd_fkSdW" outputId="f8f87452-56fe-42b9-a4ee-1f4bfd49bc85">
+
 ``` python
 regressor = Sequential()
 
@@ -60,7 +80,8 @@ regressor.compile(optimizer = 'adam', loss = 'mean_squared_error')
 print(regressor.summary())
 ```
 
-::: {.output .stream .stdout}
+<div class="output stream stdout">
+
     Model: "sequential"
     _________________________________________________________________
      Layer (type)                Output Shape              Param #   
@@ -89,15 +110,21 @@ print(regressor.summary())
     Non-trainable params: 0
     _________________________________________________________________
     None
-:::
-:::
 
-::: {.cell .code execution_count="5" colab="{\"base_uri\":\"https://localhost:8080/\"}" id="OUFw4CL8kUXG" outputId="9f4531e1-e35b-4867-f60a-b2e760ba52cd"}
+</div>
+
+</div>
+
+<div class="cell code" execution_count="5"
+colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="OUFw4CL8kUXG" outputId="9f4531e1-e35b-4867-f60a-b2e760ba52cd">
+
 ``` python
 regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
 ```
 
-::: {.output .stream .stdout}
+<div class="output stream stdout">
+
     Epoch 1/100
     38/38 [==============================] - 14s 128ms/step - loss: 0.0422
     Epoch 2/100
@@ -298,21 +325,30 @@ regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
     38/38 [==============================] - 6s 150ms/step - loss: 0.0018
     Epoch 100/100
     38/38 [==============================] - 5s 133ms/step - loss: 0.0015
-:::
 
-::: {.output .execute_result execution_count="5"}
+</div>
+
+<div class="output execute_result" execution_count="5">
+
     <keras.callbacks.History at 0x7ff988308e80>
-:::
-:::
 
-::: {.cell .code execution_count="6" id="vqpWk988m8-c"}
+</div>
+
+</div>
+
+<div class="cell code" execution_count="6" id="vqpWk988m8-c">
+
 ``` python
 dataset_test = pd.read_csv('Google_Stock_Price_Test.csv')
 real_stock_price = dataset_test.iloc[:, 1:2].values
 ```
-:::
 
-::: {.cell .code execution_count="7" colab="{\"base_uri\":\"https://localhost:8080/\"}" id="2gBfMQC5nBXU" outputId="9f5ffcd2-9865-4ce1-eca5-fe2c5f3d1d21"}
+</div>
+
+<div class="cell code" execution_count="7"
+colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}"
+id="2gBfMQC5nBXU" outputId="9f5ffcd2-9865-4ce1-eca5-fe2c5f3d1d21">
+
 ``` python
 # Getting the predicted stock price of 2017
 dataset_total = pd.concat((dataset_train['Open'], dataset_test['Open']), axis = 0)
@@ -328,12 +364,18 @@ predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 ```
 
-::: {.output .stream .stdout}
-    1/1 [==============================] - 2s 2s/step
-:::
-:::
+<div class="output stream stdout">
 
-::: {.cell .code execution_count="9" colab="{\"base_uri\":\"https://localhost:8080/\",\"height\":472}" id="BzRlT1WsnISk" outputId="e9dc5c40-21d3-4e9e-f3c9-01532da81fcf"}
+    1/1 [==============================] - 2s 2s/step
+
+</div>
+
+</div>
+
+<div class="cell code" execution_count="9"
+colab="{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:472}"
+id="BzRlT1WsnISk" outputId="e9dc5c40-21d3-4e9e-f3c9-01532da81fcf">
+
 ``` python
 # Visualising the results
 plt.plot(real_stock_price, color = 'red', label = 'Real Google Stock Price')
@@ -345,13 +387,19 @@ plt.legend()
 plt.show()
 ```
 
-::: {.output .display_data}
-![](vertopal_b96ed50ba2da4880a757768e90cc0f9f/18cd016b9c21b2cbb59337531e343027a2fddab5.png)
-:::
-:::
+<div class="output display_data">
 
-::: {.cell .code execution_count="10" id="_L1IZ434n2qi"}
+![](18cd016b9c21b2cbb59337531e343027a2fddab5.png)
+
+</div>
+
+</div>
+
+<div class="cell code" execution_count="10" id="_L1IZ434n2qi">
+
 ``` python
 ```
-:::
+
+</div>
+
 
